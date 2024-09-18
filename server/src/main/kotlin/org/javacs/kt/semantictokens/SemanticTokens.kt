@@ -145,7 +145,7 @@ private fun elementToken(element: PsiElement, bindingContext: BindingContext): S
                 }
                 else -> return null
             }
-            val isConstant = (target as? VariableDescriptor)?.let { !it.isVar() || it.isConst() } ?: false
+            val isConstant = (target as? VariableDescriptor)?.let { !it.isVar || it.isConst } ?: false
             val modifiers = if (isConstant) setOf(SemanticTokenModifier.READONLY) else setOf()
 
             SemanticToken(elementRange, tokenType, modifiers)
@@ -165,14 +165,12 @@ private fun elementToken(element: PsiElement, bindingContext: BindingContext): S
             val identifierRange = element.nameIdentifier?.let { range(file.text, it.textRange) } ?: return null
             val modifiers = mutableSetOf(SemanticTokenModifier.DECLARATION)
 
-            if (element is KtVariableDeclaration && (!element.isVar || element.hasModifier(KtTokens.CONST_KEYWORD)) || element is KtParameter) {
+            if (isReadOnly(element)) {
                 modifiers.add(SemanticTokenModifier.READONLY)
             }
 
-            if (element is KtModifierListOwner) {
-                if (element.hasModifier(KtTokens.ABSTRACT_KEYWORD)) {
+            if (element is KtModifierListOwner && element.hasModifier(KtTokens.ABSTRACT_KEYWORD)) {
                     modifiers.add(SemanticTokenModifier.ABSTRACT)
-                }
             }
 
             SemanticToken(identifierRange, tokenType, modifiers)
@@ -193,3 +191,7 @@ private fun elementToken(element: PsiElement, bindingContext: BindingContext): S
         else -> null
     }
 }
+
+private fun isReadOnly(element: PsiNameIdentifierOwner): Boolean =
+    (element is KtVariableDeclaration && (!element.isVar || element.hasModifier(KtTokens.CONST_KEYWORD)))
+        || element is KtParameter
