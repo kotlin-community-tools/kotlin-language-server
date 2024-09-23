@@ -60,7 +60,6 @@ import org.javacs.kt.LOG
 import org.javacs.kt.CodegenConfiguration
 import org.javacs.kt.CompilerConfiguration
 import org.javacs.kt.ScriptsConfiguration
-import org.javacs.kt.util.KotlinLSException
 import org.javacs.kt.util.LoggingMessageCollector
 import org.jetbrains.kotlin.cli.common.output.writeAllTo
 import org.jetbrains.kotlin.codegen.ClassBuilderFactories
