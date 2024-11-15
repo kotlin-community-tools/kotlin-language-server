@@ -10,6 +10,7 @@ val kotlinVersion = "2.0.21"
 val exposedVersion = "0.37.3"
 val lsp4jVersion = "0.21.2"
 val guavaVersion= "33.3.0-jre"
+val fernFlowerVersion = "242.23726.103"
 
 // constrain the dependencies that we use to these specific versions
 dependencies {
@@ -25,7 +26,7 @@ dependencies {
         api("org.jetbrains.kotlin:kotlin-sam-with-receiver-compiler-plugin:$kotlinVersion")
         api("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
         api("org.jetbrains.kotlin:kotlin-jvm:$kotlinVersion")
-        api("org.jetbrains:fernflower:1.0")
+        api("com.jetbrains.intellij.java:java-decompiler-engine:$fernFlowerVersion")
         api("org.jetbrains.exposed:exposed-core:$exposedVersion")
         api("org.jetbrains.exposed:exposed-dao:$exposedVersion")
         api("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")

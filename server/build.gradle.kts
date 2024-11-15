@@ -23,12 +23,10 @@ application {
 
 repositories {
     maven(url = "https://repo.gradle.org/gradle/libs-releases")
-    maven { url = uri("$projectDir/lib") }
-    maven(uri("$projectDir/lib"))
-    maven("https://jitpack.io")
+    maven(url = "https://jitpack.io")
+    maven(url = "https://www.jetbrains.com/intellij-repository/releases")
     mavenCentral()
 }
-
 
 dependencies {
     // Implementation dependencies: libraries required for your application
@@ -41,7 +39,7 @@ dependencies {
     implementation(kotlin("scripting-jvm-host-unshaded"))
     implementation(kotlin("sam-with-receiver-compiler-plugin"))
     implementation(kotlin("reflect"))
-    implementation("org.jetbrains:fernflower")
+    implementation("com.jetbrains.intellij.java:java-decompiler-engine")
     implementation("org.jetbrains.exposed:exposed-core")
     implementation("org.jetbrains.exposed:exposed-dao")
     implementation("org.jetbrains.exposed:exposed-jdbc")
